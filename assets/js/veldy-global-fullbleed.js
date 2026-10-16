@@ -192,3 +192,50 @@
   window.addEventListener('resize',schedule);
   try{new MutationObserver(schedule).observe(document.documentElement,{childList:true,subtree:true});}catch(e){}
 })();
+
+/* KakaoTalk floating contact button: fixed across all VELDY pages (desktop + mobile). */
+(function () {
+  var ID = 'veldy-kakao-floating';
+  var STYLE_ID = 'veldy-kakao-floating-style';
+  var KAKAO_URL = 'https://pf.kakao.com/_WYExcs';
+  var IMAGE_URL = 'https://vendor-cdn.imweb.me/images/kakao-talk-button-default.svg';
+
+  function mount() {
+    if (!document.body || document.getElementById(ID)) return;
+
+    if (!document.getElementById(STYLE_ID)) {
+      var style = document.createElement('style');
+      style.id = STYLE_ID;
+      style.textContent =
+        '#' + ID + '{position:fixed;right:24px;bottom:24px;width:64px;height:64px;z-index:2147483000;display:flex;align-items:center;justify-content:center;cursor:pointer;line-height:0;touch-action:manipulation;transition:transform .2s ease}' +
+        '#' + ID + ':hover{transform:translateY(-3px)}' +
+        '#' + ID + ':focus-visible{outline:3px solid #ffe812;outline-offset:4px;border-radius:50%}' +
+        '#' + ID + ' img{display:block;width:100%;height:100%;object-fit:contain}' +
+        '@media(max-width:767px){#' + ID + '{width:56px;height:56px;right:16px;bottom:calc(16px + env(safe-area-inset-bottom, 0px))}}' +
+        '@media(prefers-reduced-motion:reduce){#' + ID + '{transition:none}}';
+      (document.head || document.documentElement).appendChild(style);
+    }
+
+    var a = document.createElement('a');
+    a.id = ID;
+    a.href = KAKAO_URL;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.setAttribute('aria-label', '카카오톡 문의하기');
+    a.setAttribute('title', '카카오톡 문의하기');
+    var img = document.createElement('img');
+    img.src = IMAGE_URL;
+    img.alt = '';
+    img.width = 64;
+    img.height = 64;
+    img.decoding = 'async';
+    a.appendChild(img);
+    document.body.appendChild(a);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', mount, { once: true });
+  } else {
+    mount();
+  }
+})();

@@ -28,7 +28,6 @@
 
   var TOOLS = [
     { id: 'monday', logo: 'assets/img/tools/monday.png', detail: 'assets/img/tools/monday-detail.png' },
-    { id: 'flow', logo: 'assets/img/tools/flow.png', detail: 'assets/img/tools/flow-detail.png' },
     { id: 'gdrive', logo: 'assets/img/tools/gdrive.png', detail: 'assets/img/tools/gdrive-detail.png' }
   ];
 
@@ -147,7 +146,7 @@
 '#veldy-partners .vp-banner .vp-h .vp-newline{display:block}' +
 /* tools section */
 '#veldy-partners .vp-tools{margin-top:clamp(56px,7vw,96px);padding-top:20px;border-top:1px solid var(--vp-line)}' +
-'#veldy-partners .vp-tools-row{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,48px);margin-top:clamp(24px,3vw,40px)}' +
+'#veldy-partners .vp-tools-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,3vw,48px);margin-top:clamp(24px,3vw,40px)}' +
 '#veldy-partners .vp-tool{cursor:pointer;text-align:center;padding:clamp(24px,3vw,40px) 0;border:1px solid var(--vp-line);border-radius:12px;transition:border-color .2s}' +
 '#veldy-partners .vp-tool:hover{border-color:var(--vp-fg)}' +
 '#veldy-partners .vp-tool img{height:clamp(28px,3vw,44px);width:auto;display:inline-block}' +
@@ -311,7 +310,7 @@
         '<div class="vp-actions"><a class="vp-btn" href="contact.html">지금 구독하기</a></div>' +
       '</div>' +
 
-      /* ── 12. TOOLS — monday / flow / gdrive ──────────────────── */
+      /* ── 12. TOOLS — monday / gdrive ──────────────────── */
       '<div class="vp-tools">' +
         '<div class="vp-tools-row">' + toolsRow + '</div>' +
         toolDetails +
