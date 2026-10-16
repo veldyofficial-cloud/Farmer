@@ -207,11 +207,11 @@
       var style = document.createElement('style');
       style.id = STYLE_ID;
       style.textContent =
-        '#' + ID + '{position:fixed;right:24px;bottom:24px;width:64px;height:64px;z-index:2147483000;display:flex;align-items:center;justify-content:center;cursor:pointer;line-height:0;touch-action:manipulation;transition:transform .2s ease}' +
+        '#' + ID + '{position:fixed;right:24px;bottom:24px;width:72px;height:72px;z-index:2147483000;display:flex;align-items:center;justify-content:center;cursor:pointer;line-height:0;touch-action:manipulation;transition:transform .2s ease}' +
         '#' + ID + ':hover{transform:translateY(-3px)}' +
         '#' + ID + ':focus-visible{outline:3px solid #ffe812;outline-offset:4px;border-radius:50%}' +
         '#' + ID + ' img{display:block;width:100%;height:100%;object-fit:contain}' +
-        '@media(max-width:767px){#' + ID + '{width:56px;height:56px;right:16px;bottom:calc(16px + env(safe-area-inset-bottom, 0px))}}' +
+        '@media(max-width:767px){#' + ID + '{width:64px;height:64px;right:16px;bottom:calc(16px + env(safe-area-inset-bottom, 0px))}}' +
         '@media(prefers-reduced-motion:reduce){#' + ID + '{transition:none}}';
       (document.head || document.documentElement).appendChild(style);
     }
@@ -226,8 +226,8 @@
     var img = document.createElement('img');
     img.src = IMAGE_URL;
     img.alt = '';
-    img.width = 64;
-    img.height = 64;
+    img.width = 72;
+    img.height = 72;
     img.decoding = 'async';
     a.appendChild(img);
     document.body.appendChild(a);
