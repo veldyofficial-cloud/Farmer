@@ -86,7 +86,7 @@
 '#veldy-partners .vp-btn.mut{border-color:rgba(255,255,255,.18);color:var(--vp-mut2)}' +
 '#veldy-partners .vp-btn.mut:hover{border-color:var(--vp-fg);color:var(--vp-fg)}' +
 /* WHY SUBSCRIBE + icons — two-column layout */
-'#veldy-partners .vp-sub-layout{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:clamp(80px,10vw,160px);padding:clamp(60px,8vw,120px) 0;align-items:start}' +
+'#veldy-partners .vp-sub-layout{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:clamp(80px,10vw,160px);padding:clamp(60px,8vw,120px) 0;align-items:end}' +
 '#veldy-partners .vp-sub-left{text-align:left}' +
 '#veldy-partners .vp-label{font-family:"Inter Display","Inter Display Placeholder",sans-serif;font-size:clamp(16px,1.8vw,22px);font-weight:700;color:var(--vp-fg);margin:0 0 clamp(28px,4vw,48px);letter-spacing:.08em}' +
 '#veldy-partners .vp-q{font-family:"Inter Display","Inter Display Placeholder",sans-serif;font-size:clamp(24px,3.2vw,36px);font-weight:400;line-height:1.5;color:var(--vp-mut2);margin:0}' +
@@ -205,7 +205,7 @@
       meta('&copy; PARTNERS', '(VELDY&reg; &mdash; 구독)', 'SUBSCRIPTION') +
       '<div class="vp-hero">' +
         '<h2 class="vp-h">1인 급여로 전문 디자이너가<br>포함된 업무팀을 구독하세요.</h2>' +
-        '<p class="vp-lede">한 명을 채용하는 비용으로 브랜딩·디자인·마케팅·콘텐츠 전문가 팀 전체를 매월 구독합니다. 필요한 만큼 쓰고, 필요 없을 땐 멈추면 됩니다 — 채용·4대보험·관리 부담 없이.</p>' +
+        '<p class="vp-lede">한 명을 채용하는 비용으로 브랜딩·디자인·마케팅·콘텐츠 전문가로 구성된 팀과 함께하세요. 필요한 기간 동안 월 구독으로 이용하며, 채용과 인력 관리에 드는 부담을 줄일 수 있습니다.</p>' +
         '<div class="vp-actions">' +
           '<a class="vp-btn" href="contact.html">지금 구독하기</a>' +
           '<a class="vp-btn mut" href="https://pf.kakao.com/_WYExcs" target="_blank" rel="noopener">카카오톡 상담</a>' +

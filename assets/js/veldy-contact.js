@@ -224,6 +224,12 @@
   // Anchor the Contact overlay on a new line directly under Kakao, in document
   // coordinates so it scrolls naturally with the page.
   function position() {
+    var footerContact = [].slice.call(document.querySelectorAll('footer a[data-vldy-open]')).filter(visible)[0];
+    if (footerContact) {
+      var extra = document.getElementById('vc-contact');
+      if (extra) extra.style.display = 'none';
+      return;
+    }
     var a = findAnchor();
     if (!a) {
       // During Framer hover transitions the source button can briefly be replaced.

@@ -148,7 +148,7 @@
     if (!wired) {
       wired = true;
       // Any Contact affordance opens the inquiry form.
-      var TRIGGER = '#vldy-contact-trigger,#vc-contact,[data-vldy-open],a[href="#vldy-inquiry"],a[href="contact.html"],a[href^="contact.html#"]';
+      var TRIGGER = '#vldy-contact-trigger,#vc-contact,[data-vldy-open],a[href="#vldy-inquiry"],a[href="contact.html"],a[href^="contact.html#"],a[href$="/contact.html"],a[href$="/contact"],a[href="contact"]';
       document.addEventListener('click', function (e) {
         var t = e.target && e.target.closest ? e.target.closest(TRIGGER) : null;
         if (!t) return;
@@ -156,12 +156,12 @@
         // instead of opening the form. Read the rolling-text letter spans (not
         // textContent, which also contains the button's inline <style>) so it is
         // distinguished from the other primary button labelled "Get in touch".
-        if (t.matches && t.matches('a.framer-znJo4')) {
+        if (!t.hasAttribute('data-vldy-open') && t.matches && t.matches('a.framer-znJo4')) {
           var pr = t.querySelector('p[class*="rolling-text-inner"]');
           var label = pr ? [].map.call(pr.querySelectorAll('span'), function (s) { return s.textContent; }).join('').replace(/\s+/g, '').toLowerCase() : '';
           if (label === 'contact') {
             e.preventDefault(); e.stopPropagation();
-            window.location.href = 'https://kusc-hsbg.github.io/farmer/contact.html';
+            window.location.href = new URL('contact.html', document.querySelector('script[src*="veldy-inquiry.js"]').src.replace(/assets\/js\/[^/]+$/, '')).href;
             return;
           }
         }
