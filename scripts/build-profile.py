@@ -116,15 +116,15 @@ reference_html+='</div></section>'
 
 # Industry groups (black title block) each followed by a white band of that industry's logos.
 # Logo ids are the numbered files in assets/img/logos, preprocessed into profile/assets/brands.
-BRAND_LOGOS={'부동산 · 여행':['monica','eric','18'],'뷰티 · 메디컬':['31','01','30','28','gangnam','junish','26','08'],
- 'F&B · 레스토랑':['23','37','bibimcha','soulju','ssam','34','yeonkodari','22','29','10'],'웰니스 · 라이프스타일':['02','aviv'],
- '교육 · 아카데미 · 유학':['36','dreamu'],'금융 · 비즈니스':[],'자동차 · 산업':['jusin','heavyduty'],
- '플랫폼':['24','aquablue','kimmyungpum','jining','33']}
+BRAND_LOGOS={'부동산 · 여행':['monica','eric','18','gilbot'],'뷰티 · 메디컬':['31','01','30','28','gangnam','junish','26','08'],
+ 'F&B · 레스토랑':['23','37','bibimcha','soulju','ssam','34','yeonkodari','22','29','10','mandong','comma9','mojihae'],'웰니스 · 라이프스타일':['02','aviv'],
+ '교육 · 아카데미 · 유학':['36','dreamu','coaching'],'금융 · 비즈니스':['m4markets'],'자동차 · 산업':['jusin','heavyduty'],
+ '플랫폼':['24','aquablue','kimmyungpum','jining','33','power']}
 EXPERIENCE_LOGOS=['17','20','12','15','21','14','19','27','13','04']
 def logo_band(ids,label):
     if not ids:return ''
     ids=ids*max(1,-(-8//len(ids)))   # repeat short sets so the strip always fills the width
-    track=''.join(f'<img src="assets/brands/{i}.png" alt="" loading="lazy">' for i in ids)
+    track=''.join(f'<img src="assets/brands/{i}.png?v=20261027g" alt="" loading="lazy">' for i in ids)
     return f'<div class="brand-band" role="img" aria-label="{e(label)}"><div class="marquee-track"><div>{track}</div><div aria-hidden="true">{track}</div></div></div>'
 groups=sections[13]
 start=next(i for i,t in enumerate(groups) if t.startswith('부동산 ·'))
@@ -155,7 +155,7 @@ dialog='''<dialog id="reference-dialog" aria-labelledby="reference-title"><div c
 content=hero+about+caps+approach+services+system+solutions+work+reference_html+directory+engagement+why
 def page(body,title='VELDY | Company Profile',base='./'):
     return f'''<!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>{title}</title><meta name="description" content="브랜드 전략에서 실행과 운영까지. VELDY의 전문 영역과 프로젝트, 브랜드 레퍼런스를 소개합니다."><base href="{base}"><link rel="stylesheet" href="assets/profile.css?v=20261027f"></head><body id="top">{nav}<main id="main">{body}</main>{closing}<script id="reference-data" type="application/json">{json.dumps(refs,ensure_ascii=False)}</script><script src="../assets/js/veldy-inquiry.js?v=20261026"></script><script src="assets/profile.js?v=20261027f" defer></script></body></html>'''
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>{title}</title><meta name="description" content="브랜드 전략에서 실행과 운영까지. VELDY의 전문 영역과 프로젝트, 브랜드 레퍼런스를 소개합니다."><base href="{base}"><link rel="stylesheet" href="assets/profile.css?v=20261027g"></head><body id="top">{nav}<main id="main">{body}</main>{closing}<script id="reference-data" type="application/json">{json.dumps(refs,ensure_ascii=False)}</script><script src="../assets/js/veldy-inquiry.js?v=20261026"></script><script src="assets/profile.js?v=20261027g" defer></script></body></html>'''
 
 (OUT/'index.html').write_text(page(content),encoding='utf-8')
 (OUT/'projects/index.html').write_text(page(f'<section class="section subpage" id="work">{tag(13,"SELECTED WORK")}<h1 class="section-heading">Selected<br><span class="muted">Projects.</span></h1><p class="section-summary">실제 프로젝트의 제작물과 업무 범위를 확인하세요.</p><div class="project-grid">{project_cards(projects)}</div><a class="pill" href="./#references">레퍼런스 자료 보기 ↗</a></section>', 'VELDY | Selected Projects', '../'),encoding='utf-8')

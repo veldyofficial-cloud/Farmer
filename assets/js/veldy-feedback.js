@@ -26,7 +26,10 @@
         if (!project.website) {
           if (!a.hidden) a.hidden = true;
           a.removeAttribute('href');
-        } else if (a.getAttribute('href') !== project.website) a.setAttribute('href', project.website);
+        } else {
+          if (a.hidden) a.hidden = false;
+          if (a.getAttribute('href') !== project.website) a.setAttribute('href', project.website);
+        }
       });
     }
     document.querySelectorAll('a[href]').forEach(function (a) {
@@ -65,6 +68,7 @@
   // candidates (served locally by sw.js) are used.
   function fixTitle() {
     if (/Palmer/.test(document.title)) document.title = document.title.replace(/\s*-\s*Palmer.*$/, ' | VELDY Work');
+    if (project && project.title && document.title.indexOf(project.title) !== 0) document.title = project.title + ' | VELDY Work';
   }
   function sharpenImages() {
     document.querySelectorAll('img[srcset]').forEach(function (img) {
