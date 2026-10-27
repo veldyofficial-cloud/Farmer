@@ -9,3 +9,17 @@
 .header-clock{display:flex;gap:10px;align-items:center}.header-clock time{color:var(--fg);font-variant-numeric:tabular-nums}
 .orbit-host{position:relative;z-index:2;width:100%;height:500svh;margin:0;padding:0}
 .orbit-frame{position:sticky;top:0;display:block;width:100%;height:100svh;border:0;background:transparent;pointer-events:none}
+/* 2026-10-27 mobile review fixes */
+.logo-marquee .marquee-track>div{align-items:center}
+.logo-marquee img{height:clamp(26px,3vw,46px);width:auto;max-width:none;margin:28px clamp(30px,4vw,64px);filter:brightness(0) invert(1);opacity:.92}
+.tool-kakao{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:800}.tool-kakao img{height:30px;filter:brightness(0) invert(1)}
+.solution-list li{display:grid;grid-template-columns:55px 1fr;align-items:baseline}.solution-list span{width:auto}
+dialog{height:fit-content;max-height:90vh;overflow:auto}
+.reference-preview{aspect-ratio:16/10}.reference-preview img{object-fit:contain;background:#171717}
+.heading-ko{letter-spacing:-.025em;line-height:1.12;margin-bottom:clamp(40px,6vw,80px)}
+.footer-mark sup{margin-left:.14em;letter-spacing:0}
+.footer-caption{text-align:left}
+@media(max-width:900px){.site-header{grid-template-columns:auto 1fr auto;gap:14px}.header-clock{justify-self:end;font-size:10px;letter-spacing:.08em}.menu-toggle{grid-column:3}}
+@media(max-width:600px){.header-clock span{display:none}}
+.footer-mark{white-space:nowrap}
+@media(max-width:600px){.footer-mark{font-size:23vw}.logo-marquee img{height:30px}}

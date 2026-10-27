@@ -51,7 +51,12 @@ for slug in ['hemingway-audio','delta','sungdong','valuechainbooks','crystaloz',
     og=soup.select_one('meta[property="og:image"]')
     work=soup.select_one('section[data-framer-name="Work"]')
     img=work.select_one('img') if work else None
-    src=og.get('content','') if og else (img.get('src','') if img else '')
+    # Real cover, in order: the page's injected gallery (urls=[...]), a project og:image
+    # (the site default VELDY crest does not count), then the CMS image in the Work section.
+    gallery=re.search(r'urls=\["([^"]+)"',path.read_text(encoding='utf-8'))
+    og_src=og.get('content','') if og else ''
+    if 'sgnWS67NxQQsmxbcLnkchAISWVM' in og_src: og_src=''
+    src=gallery[1] if gallery else og_src or (img.get('src','') if img else '')
     if src and not src.startswith('http'):
         resolved=(path.parent/unquote(urlsplit(src).path)).resolve()
         src='../'+resolved.relative_to(ROOT).as_posix() if resolved.exists() else ''
@@ -88,11 +93,12 @@ for n,id_,label in [(5,'brand','BRAND STRATEGY & IDENTITY'),(6,'experience','BRA
     body=[t for t in body if '로고 띠 슬라이드' not in t]
     services+=f'<section class="section service-section" id="{id_}">{tag(n,label)}<div class="split"><h2 class="service-heading">{text(items[0])}</h2><div class="service-content">{details(body)}</div></div>'
     if n==8:
-        channels=['NAVER','NAVER TV','Instagram','TikTok','Threads','YouTube','Facebook / Meta','Kakao Channel','Littly','Daum']
-        track=''.join(f'<span>{c}</span>' for c in channels)
-        services+=f'<div class="marquee" aria-label="운영 채널: {", ".join(channels)}"><div class="marquee-track"><div>{track}</div><div aria-hidden="true">{track}</div></div></div>'
+        # Official marks (simple-icons, Wikimedia Commons, littly's own og image), shown in one white tone.
+        channels=[('NAVER','naver.svg'),('NAVER TV','navertv.svg'),('Instagram','instagram.svg'),('TikTok','tiktok.svg'),('Threads','threads.svg'),('YouTube','youtube.svg'),('Facebook / Meta','meta.svg'),('Kakao Channel','kakao.svg'),('Littly','littly.png'),('Daum','daum.svg')]
+        track=''.join(f'<img src="assets/channels/{f}" alt="{c}" loading="lazy">' for c,f in channels)
+        services+=f'<div class="marquee logo-marquee" aria-label="운영 채널: {", ".join(c for c,_ in channels)}"><div class="marquee-track"><div>{track}</div><div aria-hidden="true">{track}</div></div></div>'
     if n==10:
-        services+='<div class="tools"><span><img src="../assets/img/tools/flow.png" alt="Flow" loading="lazy"></span><span><img src="../assets/img/tools/monday.png" alt="monday.com" loading="lazy"></span><span class="tool-wordmark">KakaoTalk</span><span><img src="../assets/img/tools/gdrive.png" alt="Google Drive" loading="lazy"></span></div>'
+        services+='<div class="tools"><span><img src="../assets/img/tools/monday.png" alt="monday.com" loading="lazy"></span><span class="tool-kakao"><img src="assets/channels/kakaotalk.svg" alt="" loading="lazy">KakaoTalk</span><span><img src="../assets/img/tools/gdrive.png" alt="Google Drive" loading="lazy"></span></div>'
     services+='</section>'
 system=f'<section class="section" id="system">{tag(11,"INTEGRATED BRAND MANAGEMENT")}<h2 class="section-heading">One Brand.<br><span class="muted">One System.</span></h2><div class="system-flow">'
 for item in sections[11][1:-1]:
@@ -118,7 +124,7 @@ for group in groups[start:end]:
 directory+='</div><h3 class="experience-title">Experience Across Brands & Organizations</h3><p class="section-summary">'+e(groups[end+2].replace(', 공공기관 추가 프로젝트, 추가 촬영 브랜드',''))+'</p><div class="logo-grid">'
 for i in range(1,38):directory+=f'<img src="../assets/img/logos/logo-{i:02d}.png" alt="기존 VELDY 레퍼런스 브랜드 로고 {i}" loading="lazy">'
 directory+='</div></section>'
-engagement=f'<section class="section" id="engagement">{tag(14,"ENGAGEMENT MODELS")}<h2 class="section-heading">{text(sections[14][0])}</h2><div class="engagement-grid">'
+engagement=f'<section class="section" id="engagement">{tag(14,"ENGAGEMENT MODELS")}<h2 class="section-heading heading-ko">{text(sections[14][0])}</h2><div class="engagement-grid">'
 for i in range(3):
     engagement+=f'<div><span>0{i+1}</span><h3>{sections[14][1+i*2]}</h3><p>{sections[14][2+i*2]}</p><a class="text-link" href="#vldy-inquiry" data-vldy-open>협업 문의 ↗</a></div>'
 engagement+='</div></section>'
@@ -128,12 +134,12 @@ dialog='''<dialog id="reference-dialog" aria-labelledby="reference-title"><div c
 content=hero+about+caps+approach+services+system+solutions+work+reference_html+directory+engagement+why
 def page(body,title='VELDY | Company Profile',base='./'):
     return f'''<!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>{title}</title><meta name="description" content="브랜드 전략에서 실행과 운영까지. VELDY의 전문 영역과 프로젝트, 브랜드 레퍼런스를 소개합니다."><base href="{base}"><link rel="stylesheet" href="assets/profile.css?v=20261027"></head><body id="top">{nav}<main id="main">{body}</main>{closing}{dialog}<script id="reference-data" type="application/json">{json.dumps(refs,ensure_ascii=False)}</script><script src="../assets/js/veldy-inquiry.js?v=20261026"></script><script src="assets/profile.js?v=20261027" defer></script></body></html>'''
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>{title}</title><meta name="description" content="브랜드 전략에서 실행과 운영까지. VELDY의 전문 영역과 프로젝트, 브랜드 레퍼런스를 소개합니다."><base href="{base}"><link rel="stylesheet" href="assets/profile.css?v=20261027c"></head><body id="top">{nav}<main id="main">{body}</main>{closing}{dialog}<script id="reference-data" type="application/json">{json.dumps(refs,ensure_ascii=False)}</script><script src="../assets/js/veldy-inquiry.js?v=20261026"></script><script src="assets/profile.js?v=20261027c" defer></script></body></html>'''
 
 (OUT/'index.html').write_text(page(content),encoding='utf-8')
 (OUT/'projects/index.html').write_text(page(f'<section class="section subpage" id="work">{tag(13,"SELECTED WORK")}<h1 class="section-heading">Selected<br><span class="muted">Projects.</span></h1><p class="section-summary">실제 프로젝트의 제작물과 업무 범위를 확인하세요.</p><div class="project-grid">{project_cards(projects)}</div><a class="pill" href="./#references">레퍼런스 자료 보기 ↗</a></section>', 'VELDY | Selected Projects', '../'),encoding='utf-8')
 (OUT/'studio/index.html').write_text(page('<div class="subpage">'+about+caps+approach+why+'</div>','VELDY | About','../'),encoding='utf-8')
-(OUT/'contact/index.html').write_text(page('<section class="section subpage"><p class="eyebrow">CONTACT VELDY</p><h1 class="section-heading">브랜드의 다음 단계를<br>함께 만듭니다.</h1><p class="section-summary">프로젝트의 목표와 필요한 업무 범위를 알려주세요.</p><a class="pill light" href="#vldy-inquiry" data-vldy-open>프로젝트 문의 ↗</a></section>','VELDY | Contact','../'),encoding='utf-8')
+(OUT/'contact/index.html').write_text(page('<section class="section subpage"><p class="eyebrow">CONTACT VELDY</p><h1 class="section-heading heading-ko">브랜드의 다음 단계를<br>함께 만듭니다.</h1><p class="section-summary">프로젝트의 목표와 필요한 업무 범위를 알려주세요.</p><a class="pill light" href="#vldy-inquiry" data-vldy-open>프로젝트 문의 ↗</a></section>','VELDY | Contact','../'),encoding='utf-8')
 
 # Unpublished template demo routes must not impersonate VELDY clients or legal
 # terms. Keep their URLs working as explicit redirects to the actual profile.
