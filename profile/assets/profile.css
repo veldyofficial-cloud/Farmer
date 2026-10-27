@@ -35,3 +35,12 @@ dialog{height:fit-content;max-height:90vh;overflow:auto}
 .brand-band img{height:clamp(46px,5vw,76px);width:auto;max-width:none;margin:clamp(22px,2.6vw,38px) clamp(32px,4vw,64px)}
 @media(max-width:700px){.industry-head{grid-template-columns:1fr;gap:14px}}
 @media(prefers-reduced-motion:reduce){.brand-band .marquee-track{animation:none}}
+/* 2026-10-27 review: direct-link reference cards, wordmark channel strip, smaller brand logos */
+a.reference-preview{display:block;aspect-ratio:16/10;background:#171717}
+a.reference-preview img{object-fit:cover}
+a.reference-preview:hover img{transform:scale(1.03)}
+.logo-marquee img{height:clamp(20px,2.2vw,32px)}
+.logo-marquee img[src*="kakao.svg"]{height:clamp(34px,3.6vw,54px)}
+.logo-marquee img[src*="littly"]{height:clamp(34px,3.4vw,50px)}
+.brand-band img{height:clamp(30px,3.2vw,46px);max-width:min(240px,46vw);object-fit:contain;margin:clamp(20px,2.4vw,34px) clamp(30px,4vw,60px)}
+@media(max-width:600px){.logo-marquee img{height:20px}.logo-marquee img[src*="kakao.svg"]{height:32px}.logo-marquee img[src*="littly"]{height:34px}.brand-band img{height:30px}}
