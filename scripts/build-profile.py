@@ -116,10 +116,10 @@ reference_html+='</div></section>'
 
 # Industry groups (black title block) each followed by a white band of that industry's logos.
 # Logo ids are the numbered files in assets/img/logos, preprocessed into profile/assets/brands.
-BRAND_LOGOS={'부동산 · 여행':['monica','eric','18'],'뷰티 · 메디컬':['31','01','30','28','junish','26','08'],
- 'F&B · 레스토랑':['23','37','bibimcha','soulju','ssam','34','yeonkodari','22','29','10'],'웰니스 · 라이프스타일':['02'],
+BRAND_LOGOS={'부동산 · 여행':['monica','eric','18'],'뷰티 · 메디컬':['31','01','30','28','gangnam','junish','26','08'],
+ 'F&B · 레스토랑':['23','37','bibimcha','soulju','ssam','34','yeonkodari','22','29','10'],'웰니스 · 라이프스타일':['02','aviv'],
  '교육 · 아카데미 · 유학':['36','dreamu'],'금융 · 비즈니스':[],'자동차 · 산업':['jusin','heavyduty'],
- '플랫폼':['24','aquablue','jining','33']}
+ '플랫폼':['24','aquablue','kimmyungpum','jining','33']}
 EXPERIENCE_LOGOS=['17','20','12','15','21','14','19','27','13','04']
 def logo_band(ids,label):
     if not ids:return ''
