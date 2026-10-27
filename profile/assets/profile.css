@@ -46,8 +46,12 @@ a.reference-preview:hover img{transform:scale(1.03)}
 @media(max-width:600px){.logo-marquee img{height:20px}.logo-marquee img[src*="kakao.svg"]{height:32px}.logo-marquee img[src*="littly"]{height:34px}.brand-band img{height:30px}}
 
 /* Round 5: one long logo belt at the bottom, optically even heights */
-.logo-wall{padding:clamp(48px,7vw,96px) 0 clamp(24px,4vw,56px);background:#fff;color:#111}
-.logo-wall h3{margin:0 0 clamp(24px,3vw,40px);padding:0 var(--pad,clamp(20px,4vw,56px));font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:#666}
+.logo-wall{padding:clamp(40px,5vw,72px) 0;background:#fff;color:#111}
 .logo-wall .brand-band .marquee-track{animation-duration:200s}
-.logo-wall .brand-band img{--s:1;height:calc(var(--h,48)*1px*var(--s));width:auto;max-width:none;object-fit:contain;margin:0 clamp(36px,4.5vw,72px)}
+.logo-wall .brand-band .marquee-track>div{flex:none}
+.logo-wall .brand-band img{--s:1;flex:none;height:calc(var(--h,48)*1px*var(--s));width:auto;max-width:none;object-fit:contain;margin:0 clamp(36px,4.5vw,72px)}
 @media(max-width:600px){.logo-wall .brand-band img{--s:.68;margin:0 34px}.logo-wall .brand-band .marquee-track{animation-duration:150s}}
+/* footer links: larger, always above the oversized wordmark so they stay clickable */
+.closing .footer-links{position:relative;z-index:5;gap:8px 24px}
+.closing .footer-links a{font-size:clamp(17px,2vw,26px);font-weight:600;padding:12px 0;display:inline-block;position:relative;z-index:5;cursor:pointer}
+.closing .footer-mark{position:relative;z-index:1;pointer-events:none}
