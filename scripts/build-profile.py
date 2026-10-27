@@ -116,9 +116,9 @@ reference_html+='</div></section>'
 
 # Industry groups (black title block) each followed by a white band of that industry's logos.
 # Logo ids are the numbered files in assets/img/logos, preprocessed into profile/assets/brands.
-BRAND_LOGOS={'부동산 · 여행':['18'],'뷰티 · 메디컬':['31','01','30','28','junish','26','08'],
+BRAND_LOGOS={'부동산 · 여행':['monica','eric','18'],'뷰티 · 메디컬':['31','01','30','28','junish','26','08'],
  'F&B · 레스토랑':['23','37','bibimcha','soulju','ssam','34','yeonkodari','22','29','10'],'웰니스 · 라이프스타일':['02'],
- '교육 · 아카데미 · 유학':['36','dreamu'],'금융 · 비즈니스':[],'자동차 · 산업':['heavyduty'],
+ '교육 · 아카데미 · 유학':['36','dreamu'],'금융 · 비즈니스':[],'자동차 · 산업':['jusin','heavyduty'],
  '플랫폼':['24','aquablue','jining','33']}
 EXPERIENCE_LOGOS=['17','20','12','15','21','14','19','27','13','04']
 def logo_band(ids,label):
@@ -155,7 +155,7 @@ dialog='''<dialog id="reference-dialog" aria-labelledby="reference-title"><div c
 content=hero+about+caps+approach+services+system+solutions+work+reference_html+directory+engagement+why
 def page(body,title='VELDY | Company Profile',base='./'):
     return f'''<!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>{title}</title><meta name="description" content="브랜드 전략에서 실행과 운영까지. VELDY의 전문 영역과 프로젝트, 브랜드 레퍼런스를 소개합니다."><base href="{base}"><link rel="stylesheet" href="assets/profile.css?v=20261027e"></head><body id="top">{nav}<main id="main">{body}</main>{closing}<script id="reference-data" type="application/json">{json.dumps(refs,ensure_ascii=False)}</script><script src="../assets/js/veldy-inquiry.js?v=20261026"></script><script src="assets/profile.js?v=20261027e" defer></script></body></html>'''
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>{title}</title><meta name="description" content="브랜드 전략에서 실행과 운영까지. VELDY의 전문 영역과 프로젝트, 브랜드 레퍼런스를 소개합니다."><base href="{base}"><link rel="stylesheet" href="assets/profile.css?v=20261027f"></head><body id="top">{nav}<main id="main">{body}</main>{closing}<script id="reference-data" type="application/json">{json.dumps(refs,ensure_ascii=False)}</script><script src="../assets/js/veldy-inquiry.js?v=20261026"></script><script src="assets/profile.js?v=20261027f" defer></script></body></html>'''
 
 (OUT/'index.html').write_text(page(content),encoding='utf-8')
 (OUT/'projects/index.html').write_text(page(f'<section class="section subpage" id="work">{tag(13,"SELECTED WORK")}<h1 class="section-heading">Selected<br><span class="muted">Projects.</span></h1><p class="section-summary">실제 프로젝트의 제작물과 업무 범위를 확인하세요.</p><div class="project-grid">{project_cards(projects)}</div><a class="pill" href="./#references">레퍼런스 자료 보기 ↗</a></section>', 'VELDY | Selected Projects', '../'),encoding='utf-8')
