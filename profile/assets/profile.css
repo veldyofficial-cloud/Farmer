@@ -55,3 +55,9 @@ a.reference-preview:hover img{transform:scale(1.03)}
 .closing .footer-links{position:relative;z-index:5;gap:8px 24px}
 .closing .footer-links a{font-size:clamp(17px,2vw,26px);font-weight:600;padding:12px 0;display:inline-block;position:relative;z-index:5;cursor:pointer}
 .closing .footer-mark{position:relative;z-index:1;pointer-events:none}
+
+/* VELDY wordmark images (header + footer) */
+.site-header .brand{display:inline-flex;align-items:center}
+.site-header .brand img{height:clamp(14px,1.5vw,20px);width:auto;display:block}
+.closing .footer-mark{font-size:0;line-height:0;margin:clamp(20px,3vw,40px) 0}
+.closing .footer-mark img{width:100%;height:auto;display:block}
