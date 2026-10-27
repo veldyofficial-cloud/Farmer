@@ -68,6 +68,15 @@ async function serve(request) {
     const cands = byBase[base];
     if (cands && cands.length) info = cands[0]; // best (largest) mirrored variant
   }
+  // Prefer the site's own full-resolution copy when the CDN mirror only captured a smaller variant
+  // (newer images were mirrored at 512px only, which made them look soft at full width).
+  if (info) {
+    try {
+      const lid = localImageId(new URL(full).pathname);
+      const best = lid && localImg[lid] && localImg[lid][0];
+      if (best && best.bytes > (info.bytes || 0)) info = null;
+    } catch (_) {}
+  }
   if (info) {
     const resp = await fetch(MIRROR + info.file);
     if (resp.ok) {
@@ -86,7 +95,11 @@ async function serve(request) {
     const u = new URL(full);
     const id = localImageId(u.pathname);
     if (id) {
-      const best = localImg[id][0];
+      // pick the local variant matching the requested tier (512 / 1024 / 2048 / original)
+      const asc = localImg[id].filter((v, k, a) => a.findIndex((w) => w.bytes === v.bytes) === k).slice().sort((a, b) => a.bytes - b.bytes);
+      const want = +(u.search.match(/scale-down-to=(\d+)/) || [])[1] || 0;
+      const tier = want ? [512, 1024, 2048].indexOf(want) : 3;
+      const best = tier < 0 ? asc[asc.length - 1] : asc[Math.min(asc.length - 1, Math.max(0, tier - (4 - asc.length)))];
       const ext = (best.file.split('.').pop() || '').toLowerCase();
       const resp = await fetch(LOCAL_IMAGES + encodeURIComponent(best.file));
       if (resp.ok) {

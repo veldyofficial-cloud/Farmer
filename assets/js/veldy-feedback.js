@@ -11,7 +11,7 @@
         if (/^\d{4}$/.test(year) && time.textContent !== year) time.textContent = year;
       });
       if (project.title) document.querySelectorAll('section[data-framer-name="Title"] h1').forEach(function (h) {
-        var title = project.title + ' /';
+        var title = project.title + ' / ';
         if (h.textContent !== title) h.textContent = title;
       });
       if (project.category) document.querySelectorAll('.framer-15bf1mu p').forEach(function (p) {
@@ -60,14 +60,29 @@
       }
     });
   }
+  // The hydrated srcset keeps one pre-loaded 512px local candidate in front of the CDN candidates;
+  // the browser re-uses that already-loaded file, so images stay soft. Drop it so the sharper
+  // candidates (served locally by sw.js) are used.
+  function fixTitle() {
+    if (/Palmer/.test(document.title)) document.title = document.title.replace(/\s*-\s*Palmer.*$/, ' | VELDY Work');
+  }
+  function sharpenImages() {
+    document.querySelectorAll('img[srcset]').forEach(function (img) {
+      if (img.dataset.veldySharp) return;
+      var parts = img.getAttribute('srcset').split(/,\s*(?=\S)/);
+      if (parts.length < 2 || /^https?:/.test(parts[0]) || !/^https?:\/\/framerusercontent\.com\/images\//.test(parts[1])) return;
+      img.dataset.veldySharp = '1';
+      img.setAttribute('srcset', parts.slice(1).join(', '));
+    });
+  }
   var queued = false;
   function schedule() {
     if (queued) return;
     queued = true;
-    requestAnimationFrame(function () { queued = false; repair(); });
+    setTimeout(function () { queued = false; repair(); sharpenImages(); fixTitle(); }, 300);   // throttled: Framer mutates the DOM continuously
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', repair);
   else repair();
   new MutationObserver(schedule).observe(document.documentElement, {subtree:true, childList:true});
-  window.addEventListener('load', repair);
+  window.addEventListener('load', function () { repair(); sharpenImages(); fixTitle(); });
 })();
