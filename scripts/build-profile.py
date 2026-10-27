@@ -114,16 +114,28 @@ for i,r in enumerate(refs):
     reference_html+=f'<article class="reference-card" data-kind="{r["kind"]}"><button class="reference-preview" data-reference="{i}" aria-label="{r["brand"]} {r["label"]} 미리보기"><img src="assets/references/{r["preview"]}" alt="{r["brand"]} {r["label"]}" loading="lazy"><span>미리보기 ↗</span></button><div class="reference-meta"><div><small>{r["label"]}</small><h3>{r["brand"]}</h3></div><a href="{r["url"]}" target="_blank" rel="noopener noreferrer" aria-label="{r["brand"]} {r["label"]} 원본 새 창에서 열기">원본 ↗</a></div></article>'
 reference_html+='</div></section>'
 
-directory='<section class="section directory" id="brand-directory"><div class="section-label"><span>[13—C]</span><span>BRANDS & ORGANIZATIONS</span></div><h2 class="section-heading">Across industries<span class="accent">.</span></h2><div class="directory-grid">'
+# Industry groups (black title block) each followed by a white band of that industry's logos.
+# Logo ids are the numbered files in assets/img/logos, preprocessed into profile/assets/brands.
+BRAND_LOGOS={'부동산 · 여행':['18'],'뷰티 · 메디컬':['31','30','28','26','08','05','06','01'],
+ 'F&B · 레스토랑':['23','37','34','22','yeonkodari','29','10'],'웰니스 · 라이프스타일':['02'],
+ '교육 · 아카데미 · 유학':['36','25'],'금융 · 비즈니스':[],'자동차 · 산업':['07'],'플랫폼 · 디지털':['24'],
+ '종교 · 커뮤니티':[],'개인 · 전문가 브랜딩':['33']}
+EXPERIENCE_LOGOS=['17','20','12','15','21','14','19','27','13','04']
+def logo_band(ids,label):
+    if not ids:return ''
+    ids=ids*max(1,-(-8//len(ids)))   # repeat short sets so the strip always fills the width
+    track=''.join(f'<img src="assets/brands/{i}.png" alt="" loading="lazy">' for i in ids)
+    return f'<div class="brand-band" role="img" aria-label="{e(label)}"><div class="marquee-track"><div>{track}</div><div aria-hidden="true">{track}</div></div></div>'
 groups=sections[13]
 start=next(i for i,t in enumerate(groups) if t.startswith('부동산 ·'))
 end=next(i for i,t in enumerate(groups) if t.startswith('02. EXPERIENCE'))
+directory=f'<section class="section directory" id="brand-directory"><div class="section-label"><span>[13—B]</span><span>BRANDS & ORGANIZATIONS</span></div><h2 class="section-heading">Across industries<span class="accent">.</span></h2></section>'
 for group in groups[start:end]:
-    title,names=group.split('\n',1)
-    directory+=f'<div><h3>{e(title)}</h3><p>{e(names)}</p></div>'
-directory+='</div><h3 class="experience-title">Experience Across Brands & Organizations</h3><p class="section-summary">'+e(groups[end+2].replace(', 공공기관 추가 프로젝트, 추가 촬영 브랜드',''))+'</p><div class="logo-grid">'
-for i in range(1,38):directory+=f'<img src="../assets/img/logos/logo-{i:02d}.png" alt="기존 VELDY 레퍼런스 브랜드 로고 {i}" loading="lazy">'
-directory+='</div></section>'
+    title,names=group.split(chr(10),1)
+    if title.startswith('문화'):continue   # 문화 · 음악 removed per Monday feedback
+    directory+=f'<section class="industry"><div class="industry-head"><h3>{e(title)}</h3><p>{e(names)}</p></div>{logo_band(BRAND_LOGOS.get(title,[]),title+" 브랜드 로고")}</section>'
+exp_names=groups[end+2].replace(', 공공기관 추가 프로젝트, 추가 촬영 브랜드','')
+directory+=f'<section class="industry"><div class="industry-head"><h3>Experience Across Brands & Organizations</h3><p>{e(exp_names)}</p></div>{logo_band(EXPERIENCE_LOGOS,"경력·협업 브랜드 로고")}</section>'
 engagement=f'<section class="section" id="engagement">{tag(14,"ENGAGEMENT MODELS")}<h2 class="section-heading heading-ko">{text(sections[14][0])}</h2><div class="engagement-grid">'
 for i in range(3):
     engagement+=f'<div><span>0{i+1}</span><h3>{sections[14][1+i*2]}</h3><p>{sections[14][2+i*2]}</p><a class="text-link" href="#vldy-inquiry" data-vldy-open>협업 문의 ↗</a></div>'
@@ -134,7 +146,7 @@ dialog='''<dialog id="reference-dialog" aria-labelledby="reference-title"><div c
 content=hero+about+caps+approach+services+system+solutions+work+reference_html+directory+engagement+why
 def page(body,title='VELDY | Company Profile',base='./'):
     return f'''<!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>{title}</title><meta name="description" content="브랜드 전략에서 실행과 운영까지. VELDY의 전문 영역과 프로젝트, 브랜드 레퍼런스를 소개합니다."><base href="{base}"><link rel="stylesheet" href="assets/profile.css?v=20261027c"></head><body id="top">{nav}<main id="main">{body}</main>{closing}{dialog}<script id="reference-data" type="application/json">{json.dumps(refs,ensure_ascii=False)}</script><script src="../assets/js/veldy-inquiry.js?v=20261026"></script><script src="assets/profile.js?v=20261027c" defer></script></body></html>'''
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>{title}</title><meta name="description" content="브랜드 전략에서 실행과 운영까지. VELDY의 전문 영역과 프로젝트, 브랜드 레퍼런스를 소개합니다."><base href="{base}"><link rel="stylesheet" href="assets/profile.css?v=20261027d"></head><body id="top">{nav}<main id="main">{body}</main>{closing}{dialog}<script id="reference-data" type="application/json">{json.dumps(refs,ensure_ascii=False)}</script><script src="../assets/js/veldy-inquiry.js?v=20261026"></script><script src="assets/profile.js?v=20261027d" defer></script></body></html>'''
 
 (OUT/'index.html').write_text(page(content),encoding='utf-8')
 (OUT/'projects/index.html').write_text(page(f'<section class="section subpage" id="work">{tag(13,"SELECTED WORK")}<h1 class="section-heading">Selected<br><span class="muted">Projects.</span></h1><p class="section-summary">실제 프로젝트의 제작물과 업무 범위를 확인하세요.</p><div class="project-grid">{project_cards(projects)}</div><a class="pill" href="./#references">레퍼런스 자료 보기 ↗</a></section>', 'VELDY | Selected Projects', '../'),encoding='utf-8')

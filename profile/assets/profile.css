@@ -23,3 +23,15 @@ dialog{height:fit-content;max-height:90vh;overflow:auto}
 @media(max-width:600px){.header-clock span{display:none}}
 .footer-mark{white-space:nowrap}
 @media(max-width:600px){.footer-mark{font-size:23vw}.logo-marquee img{height:30px}}
+/* industries: black title block + white logo band */
+.directory-intro{padding-bottom:0}
+.industry{border-top:1px solid var(--line)}
+.industry-head{padding:clamp(48px,6vw,96px) var(--pad) clamp(34px,4vw,60px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:clamp(24px,5vw,90px);align-items:end}
+.industry-head h3{margin:0;font-size:clamp(28px,4vw,64px);line-height:1.08;letter-spacing:-.04em}
+.industry-head p{margin:0;color:#a0a09b;font-size:clamp(14px,1.3vw,19px)}
+.brand-band{background:#fff;overflow:hidden}
+.brand-band .marquee-track{animation-duration:38s}
+.brand-band .marquee-track>div{align-items:center}
+.brand-band img{height:clamp(46px,5vw,76px);width:auto;max-width:none;margin:clamp(22px,2.6vw,38px) clamp(32px,4vw,64px)}
+@media(max-width:700px){.industry-head{grid-template-columns:1fr;gap:14px}}
+@media(prefers-reduced-motion:reduce){.brand-band .marquee-track{animation:none}}
