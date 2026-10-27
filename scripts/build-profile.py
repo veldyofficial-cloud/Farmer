@@ -124,7 +124,12 @@ EXPERIENCE_LOGOS=['17','20','12','15','21','14','19','27','13','04']
 def logo_band(ids,label):
     if not ids:return ''
     ids=ids*max(1,-(-8//len(ids)))   # repeat short sets so the strip always fills the width
-    track=''.join(f'<img src="assets/brands/{i}.png?v=20261027h" alt="" loading="lazy">' for i in ids)
+    def img(i):
+        from PIL import Image
+        w,h=Image.open(ROOT/f'profile/assets/brands/{i}.png').size   # even optical height: wide wordmarks shrink gently, compact marks grow
+        hh=round(max(22,min(60,60*(2.5/(w/h))**0.5)))
+        return f'<img src="assets/brands/{i}.png?v=20261027i" alt="" loading="lazy" style="--h:{hh}">'
+    track=''.join(img(i) for i in ids)
     return f'<div class="brand-band" role="img" aria-label="{e(label)}"><div class="marquee-track"><div>{track}</div><div aria-hidden="true">{track}</div></div></div>'
 groups=sections[13]
 start=next(i for i,t in enumerate(groups) if t.startswith('부동산 ·'))
@@ -135,16 +140,20 @@ order=[]
 for group in groups[start:end]:
     title,names=group.split(chr(10),1)
     if title.startswith('문화'):continue   # 문화 · 음악 removed per Monday feedback
-    names=names.replace('드림유학원','드림유치기공')
+    names=names.replace('드림유학원','드림유치기공').replace(', 부동산읽어주는남자 에릭','').replace(', 유로구뜨','')
     if title.startswith(('플랫폼','종교','개인')):
         if '플랫폼' not in merged:order.append('플랫폼');merged['플랫폼']=[]
         merged['플랫폼'].append(names);continue
     order.append(title);merged[title]=[names]
 for title in order:
     names=', '.join(merged[title])
-    directory+=f'<section class="industry"><div class="industry-head"><h3>{e(title)}</h3><p>{e(names)}</p></div>{logo_band(BRAND_LOGOS.get(title,[]),title+" 브랜드 로고")}</section>'
+    directory+=f'<section class="industry"><div class="industry-head"><h3>{e(title)}</h3><p>{e(names)}</p></div></section>'
 exp_names=groups[end+2].replace(', 공공기관 추가 프로젝트, 추가 촬영 브랜드','')
-directory+=f'<section class="industry"><div class="industry-head"><h3>Experience Across Brands & Organizations</h3><p>{e(exp_names)}</p></div>{logo_band(EXPERIENCE_LOGOS,"경력·협업 브랜드 로고")}</section>'
+directory+=f'<section class="industry"><div class="industry-head"><h3>Experience Across Brands & Organizations</h3><p>{e(exp_names)}</p></div></section>'
+all_logos=[]
+for ids in list(BRAND_LOGOS.values())+[EXPERIENCE_LOGOS]:
+    all_logos+=[i for i in ids if i not in all_logos]
+directory+=f'<section class="logo-wall"><h3>Brands we have worked with</h3>{logo_band(all_logos,"함께한 브랜드 로고")}</section>'
 engagement=f'<section class="section" id="engagement">{tag(14,"ENGAGEMENT MODELS")}<h2 class="section-heading heading-ko">{text(sections[14][0])}</h2><div class="engagement-grid">'
 for i in range(3):
     engagement+=f'<div><span>0{i+1}</span><h3>{sections[14][1+i*2]}</h3><p>{sections[14][2+i*2]}</p><a class="text-link" href="#vldy-inquiry" data-vldy-open>협업 문의 ↗</a></div>'
@@ -155,7 +164,7 @@ dialog='''<dialog id="reference-dialog" aria-labelledby="reference-title"><div c
 content=hero+about+caps+approach+services+system+solutions+work+reference_html+directory+engagement+why
 def page(body,title='VELDY | Company Profile',base='./'):
     return f'''<!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>{title}</title><meta name="description" content="브랜드 전략에서 실행과 운영까지. VELDY의 전문 영역과 프로젝트, 브랜드 레퍼런스를 소개합니다."><base href="{base}"><link rel="stylesheet" href="assets/profile.css?v=20261027h"></head><body id="top">{nav}<main id="main">{body}</main>{closing}<script id="reference-data" type="application/json">{json.dumps(refs,ensure_ascii=False)}</script><script src="../assets/js/veldy-inquiry.js?v=20261026"></script><script src="assets/profile.js?v=20261027h" defer></script></body></html>'''
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>{title}</title><meta name="description" content="브랜드 전략에서 실행과 운영까지. VELDY의 전문 영역과 프로젝트, 브랜드 레퍼런스를 소개합니다."><base href="{base}"><link rel="stylesheet" href="assets/profile.css?v=20261027i"></head><body id="top">{nav}<main id="main">{body}</main>{closing}<script id="reference-data" type="application/json">{json.dumps(refs,ensure_ascii=False)}</script><script src="../assets/js/veldy-inquiry.js?v=20261026"></script><script src="assets/profile.js?v=20261027h" defer></script></body></html>'''
 
 (OUT/'index.html').write_text(page(content),encoding='utf-8')
 (OUT/'projects/index.html').write_text(page(f'<section class="section subpage" id="work">{tag(13,"SELECTED WORK")}<h1 class="section-heading">Selected<br><span class="muted">Projects.</span></h1><p class="section-summary">실제 프로젝트의 제작물과 업무 범위를 확인하세요.</p><div class="project-grid">{project_cards(projects)}</div><a class="pill" href="./#references">레퍼런스 자료 보기 ↗</a></section>', 'VELDY | Selected Projects', '../'),encoding='utf-8')

@@ -44,3 +44,10 @@ a.reference-preview:hover img{transform:scale(1.03)}
 .logo-marquee img[src*="littly"]{height:clamp(34px,3.4vw,50px)}
 .brand-band img{height:clamp(30px,3.2vw,46px);max-width:min(240px,46vw);object-fit:contain;margin:clamp(20px,2.4vw,34px) clamp(30px,4vw,60px)}
 @media(max-width:600px){.logo-marquee img{height:20px}.logo-marquee img[src*="kakao.svg"]{height:32px}.logo-marquee img[src*="littly"]{height:34px}.brand-band img{height:30px}}
+
+/* Round 5: one long logo belt at the bottom, optically even heights */
+.logo-wall{padding:clamp(48px,7vw,96px) 0 clamp(24px,4vw,56px);background:#fff;color:#111}
+.logo-wall h3{margin:0 0 clamp(24px,3vw,40px);padding:0 var(--pad,clamp(20px,4vw,56px));font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:#666}
+.logo-wall .brand-band .marquee-track{animation-duration:200s}
+.logo-wall .brand-band img{--s:1;height:calc(var(--h,48)*1px*var(--s));width:auto;max-width:none;object-fit:contain;margin:0 clamp(36px,4.5vw,72px)}
+@media(max-width:600px){.logo-wall .brand-band img{--s:.68;margin:0 34px}.logo-wall .brand-band .marquee-track{animation-duration:150s}}
