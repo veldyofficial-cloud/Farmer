@@ -71,11 +71,16 @@
     if (project && project.title && document.title.indexOf(project.title) !== 0) document.title = project.title + ' | VELDY Work';
   }
   function sharpenImages() {
+    // Only when sw.js controls the page: without it the CDN candidates are not served locally and would 404
+    // (first visit, iOS in-app browsers), leaving broken images. Fall back to the original srcset on any error.
+    if (!(navigator.serviceWorker && navigator.serviceWorker.controller)) return;
     document.querySelectorAll('img[srcset]').forEach(function (img) {
       if (img.dataset.veldySharp) return;
-      var parts = img.getAttribute('srcset').split(/,\s*(?=\S)/);
+      var orig = img.getAttribute('srcset');
+      var parts = orig.split(/,\s*(?=\S)/);
       if (parts.length < 2 || /^https?:/.test(parts[0]) || !/^https?:\/\/framerusercontent\.com\/images\//.test(parts[1])) return;
       img.dataset.veldySharp = '1';
+      img.addEventListener('error', function () { img.setAttribute('srcset', orig); }, { once: true });
       img.setAttribute('srcset', parts.slice(1).join(', '));
     });
   }

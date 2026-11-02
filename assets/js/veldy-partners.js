@@ -33,7 +33,7 @@
 
   var SVG_PATHS = {
     folder: '<path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h7a2 2 0 012 2z"/>',
-    megaphone: '<path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 010 7.07"/>',
+    megaphone: '<path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 11-5.8-1.6"/>',
     printer: '<path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/>',
     package: '<path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/>',
     book: '<path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2zM22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>',
@@ -96,8 +96,18 @@
 /* icons grid (right column) */
 '#veldy-partners .vp-icons{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,3vw,40px)}' +
 '#veldy-partners .vp-ic{text-align:center}' +
-'#veldy-partners .vp-ic-circle{display:inline-flex;align-items:center;justify-content:center;width:clamp(60px,6vw,85px);height:clamp(60px,6vw,85px);border-radius:50%;border:1.5px solid rgba(255,255,255,.3);background:transparent;color:#fff;margin-bottom:clamp(10px,1.5vw,16px)}' +
-'#veldy-partners .vp-ic-circle svg{width:38%;height:38%}' +
+'#veldy-partners .vp-ic-circle{position:relative;display:inline-flex;align-items:center;justify-content:center;width:clamp(60px,6vw,85px);height:clamp(60px,6vw,85px);border-radius:50%;border:1px solid rgba(255,255,255,.26);background:radial-gradient(circle at 30% 22%,rgba(255,255,255,.42),rgba(255,255,255,.08) 42%,rgba(255,255,255,.02) 72%),linear-gradient(150deg,rgba(150,160,255,.28),rgba(255,255,255,.03) 55%,rgba(80,220,230,.14));-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),inset 0 -12px 22px rgba(0,0,0,.4),0 12px 34px rgba(110,125,255,.22),0 0 0 1px rgba(0,0,0,.35);color:#fff;margin-bottom:clamp(10px,1.5vw,16px);transition:transform .35s ease,box-shadow .35s ease}' +
+'#veldy-partners .vp-ic-circle:after{content:"+";position:absolute;top:-2px;right:-2px;width:26%;height:26%;min-width:16px;min-height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:500 clamp(11px,1.1vw,15px)/1 "Inter",sans-serif;color:#fff;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.55),rgba(255,255,255,.12));border:1px solid rgba(255,255,255,.35);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:0 0 12px rgba(150,170,255,.5)}' +
+'#veldy-partners .vp-ic:hover .vp-ic-circle{transform:translateY(-4px);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),inset 0 -12px 22px rgba(0,0,0,.4),0 18px 44px rgba(110,125,255,.4),0 0 0 1px rgba(0,0,0,.35)}' +
+/* ambient smoke / gradient light behind the subscription area */
+'#veldy-partners{position:relative;isolation:isolate;overflow-x:clip;order:-500}' +
+'.framer-8qUek .framer-122h8qz,body .framer-122h8qz{order:-499!important}' +
+'#veldy-partners .vp-hero,#veldy-partners .vp-sub-layout{position:relative}' +
+'#veldy-partners .vp-hero:before,#veldy-partners .vp-sub-layout:before{content:"";position:absolute;z-index:-1;pointer-events:none;inset:-25% -15%;filter:blur(70px);opacity:.9;background:radial-gradient(38% 42% at 18% 30%,rgba(120,110,255,.34),transparent 70%),radial-gradient(34% 40% at 82% 38%,rgba(60,200,225,.22),transparent 70%),radial-gradient(40% 36% at 55% 85%,rgba(255,160,120,.14),transparent 70%);animation:vpSmoke 18s ease-in-out infinite alternate}' +
+'#veldy-partners .vp-sub-layout:before{inset:-10% -15%}' +
+'@keyframes vpSmoke{0%{transform:translate3d(-3%,-2%,0) scale(1)}100%{transform:translate3d(4%,3%,0) scale(1.08)}}' +
+'@media(prefers-reduced-motion:reduce){#veldy-partners .vp-hero:before,#veldy-partners .vp-sub-layout:before{animation:none}}' +
+'#veldy-partners .vp-ic-circle svg{width:42%;height:42%;position:relative;z-index:1}' +
 '#veldy-partners .vp-ic-title{font-family:"Inter Display","Inter Display Placeholder",sans-serif;font-size:clamp(13px,1.3vw,16px);font-weight:700;color:var(--vp-fg);margin:0 0 4px}' +
 '#veldy-partners .vp-ic-desc{font-size:clamp(11px,1vw,14px);color:var(--vp-mut2);margin:0}' +
 /* two-column block */
