@@ -13,13 +13,13 @@
   ];
 
   var SERVICES = [
-    { icon: 'folder', title: 'BI • CI • BX', desc: '로고 및 브랜딩' },
+    { icon: 'brand', title: 'BI • CI • BX', desc: '로고 및 브랜딩' },
     { icon: 'megaphone', title: '광고 콘텐츠', desc: 'SNS 콘텐츠 / 상세페이지' },
     { icon: 'printer', title: '디지털 인쇄', desc: '포스터 / 리플렛 / 라벨 등' },
     { icon: 'package', title: '패키지', desc: '디자인 및 제작 대행' },
     { icon: 'book', title: '편집디자인', desc: '카달로그 / 책자 등' },
     { icon: 'chat', title: '마케팅 전략 기획', desc: '로드맵 제안' },
-    { icon: 'quote', title: 'PPT', desc: '하단에 브리핑 자료 까지' },
+    { icon: 'presentation', title: 'PPT', desc: '하단에 브리핑 자료 까지' },
     { icon: 'pen', title: '그래픽', desc: '일러스트 / 소스 개발' },
     { icon: 'video', title: '영상 편집', desc: '촬영 및 편집' }
   ];
@@ -32,12 +32,14 @@
   ];
 
   var SVG_PATHS = {
+    brand: '<rect x="3" y="3" width="18" height="18" rx="4"/><path d="m7 16 5-9 5 9M9 13h6"/>',
     folder: '<path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h7a2 2 0 012 2z"/>',
-    megaphone: '<path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 11-5.8-1.6"/>',
+    megaphone: '<path d="M3 9h4l12-5v16L7 15H3zM7 9v6m-2 0 2 6h4l-2-5M22 9v6"/>',
     printer: '<path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/>',
     package: '<path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/>',
     book: '<path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2zM22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>',
     chat: '<path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>',
+    presentation: '<rect x="3" y="3" width="18" height="13" rx="2"/><path d="M12 16v5m-4 0 4-3 4 3M7 12V9m5 3V7m5 5V6"/>',
     quote: '<path d="M6 17h3l2-4V7H5v6h3M14 17h3l2-4V7h-6v6h3"/>',
     pen: '<path d="M17 3a2.83 2.83 0 114 4L7.5 20.5 2 22l1.5-5.5z"/>',
     video: '<path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/>'
@@ -60,7 +62,7 @@
   }
 
   function svgIcon(name) {
-    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' + (SVG_PATHS[name] || '') + '</svg>';
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true" focusable="false" stroke-linecap="round" stroke-linejoin="round">' + (SVG_PATHS[name] || '') + '</svg>';
   }
 
   /* ── CSS ─────────────────────────────────────────────────────── */
@@ -96,12 +98,12 @@
 /* icons grid (right column) */
 '#veldy-partners .vp-icons{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,3vw,40px)}' +
 '#veldy-partners .vp-ic{text-align:center}' +
-'#veldy-partners .vp-ic-circle{position:relative;display:inline-flex;align-items:center;justify-content:center;width:clamp(60px,6vw,85px);height:clamp(60px,6vw,85px);border-radius:50%;border:1px solid rgba(255,255,255,.26);background:radial-gradient(circle at 30% 22%,rgba(255,255,255,.42),rgba(255,255,255,.08) 42%,rgba(255,255,255,.02) 72%),linear-gradient(150deg,rgba(150,160,255,.28),rgba(255,255,255,.03) 55%,rgba(80,220,230,.14));-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),inset 0 -12px 22px rgba(0,0,0,.4),0 12px 34px rgba(110,125,255,.22),0 0 0 1px rgba(0,0,0,.35);color:#fff;margin-bottom:clamp(10px,1.5vw,16px);transition:transform .35s ease,box-shadow .35s ease}' +
-'#veldy-partners .vp-ic-circle:after{content:"+";position:absolute;top:-2px;right:-2px;width:26%;height:26%;min-width:16px;min-height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:500 clamp(11px,1.1vw,15px)/1 "Inter",sans-serif;color:#fff;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.55),rgba(255,255,255,.12));border:1px solid rgba(255,255,255,.35);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:0 0 12px rgba(150,170,255,.5)}' +
-'#veldy-partners .vp-ic:hover .vp-ic-circle{transform:translateY(-4px);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),inset 0 -12px 22px rgba(0,0,0,.4),0 18px 44px rgba(110,125,255,.4),0 0 0 1px rgba(0,0,0,.35)}' +
+'#veldy-partners .vp-ic-circle{display:inline-flex;align-items:center;justify-content:center;width:clamp(60px,6vw,85px);height:clamp(60px,6vw,85px);border-radius:50%;border:1px solid var(--vp-line);background:var(--vp-bg);color:var(--vp-fg);margin-bottom:clamp(10px,1.5vw,16px)}' +
+
+
 /* ambient smoke / gradient light behind the subscription area */
-'#veldy-partners{position:relative;isolation:isolate;overflow-x:clip;order:-500}' +
-'.framer-8qUek .framer-122h8qz,body .framer-122h8qz{order:-499!important}' +
+'#veldy-partners{position:relative;isolation:isolate;overflow-x:clip;order:-499}' +
+'.framer-8qUek .framer-122h8qz,body .framer-122h8qz{order:-500!important}' +
 '#veldy-partners .vp-hero,#veldy-partners .vp-sub-layout{position:relative}' +
 '#veldy-partners .vp-hero:before,#veldy-partners .vp-sub-layout:before{content:"";position:absolute;z-index:-1;pointer-events:none;inset:-25% -15%;filter:blur(70px);opacity:.9;background:radial-gradient(38% 42% at 18% 30%,rgba(120,110,255,.34),transparent 70%),radial-gradient(34% 40% at 82% 38%,rgba(60,200,225,.22),transparent 70%),radial-gradient(40% 36% at 55% 85%,rgba(255,160,120,.14),transparent 70%);animation:vpSmoke 18s ease-in-out infinite alternate}' +
 '#veldy-partners .vp-sub-layout:before{inset:-10% -15%}' +
@@ -367,7 +369,7 @@
   function placed() {
     var node = document.getElementById('veldy-partners');
     var faq = document.querySelector(FAQ_SEL);
-    return !!(node && faq && node.nextElementSibling === faq && node.parentNode === faq.parentNode);
+    return !!(node && faq && faq.nextElementSibling === node && node.parentNode === faq.parentNode);
   }
 
   function place() {
@@ -377,7 +379,7 @@
     if (placed()) return;
     var node = getNode();
     if (observer) observer.disconnect();
-    faq.parentNode.insertBefore(node, faq);
+    faq.parentNode.insertBefore(node, faq.nextSibling);
     if (observer) observer.observe(document.documentElement, { childList: true, subtree: true });
   }
 
