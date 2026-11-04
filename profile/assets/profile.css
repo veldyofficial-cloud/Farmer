@@ -63,24 +63,36 @@ a.reference-preview:hover img{transform:scale(1.03)}
 .closing .footer-mark img{width:100%;height:auto;display:block}
 
 /* November review: align tools to the heading, preserve reference artwork. */
-#operations .tools{width:min(100%,760px);margin-left:0;margin-right:auto;gap:clamp(20px,4vw,66px)}
+#operations .tools{position:relative;left:calc(42.5% + clamp(28.75px,4.6vw,86.25px));transform:translateX(-50%);width:min(100%,760px);margin-left:0;margin-right:0;justify-content:center;gap:clamp(20px,4vw,66px)}
 #operations .tools img{height:38.4px;max-width:168px}
 #operations .tool-kakao{font-size:26.4px;gap:12px}
 #operations .tool-kakao img{height:36px}
-#system .system-flow h3{font-size:16.8px}
-#system .system-flow p{font-size:14.4px}
+#system .system-flow h3{font-size:22.68px}
+#system .system-flow p{font-size:22.32px}
 .logo-marquee img[src*="youtube.svg"]{filter:none}
-.logo-marquee img[src*="kakao.svg"]{height:clamp(45.9px,4.86vw,72.9px)}
+.logo-marquee img[src*="kakao.svg"]{height:clamp(57.375px,6.075vw,91.125px)}
 .logo-marquee img[src*="meta.svg"]{height:clamp(23px,2.53vw,36.8px)}
+a.reference-preview:has(img[src*="soulju-profile"]),
 a.reference-preview:has(img[src*="sushinova-profile"]),
-a.reference-preview:has(img[src*="bibimcha-profile"]){aspect-ratio:16/9}
+a.reference-preview:has(img[src*="bibimcha-profile"]){aspect-ratio:16/10}
+a.reference-preview img[src*="soulju-profile"],
 a.reference-preview img[src*="sushinova-profile"],
-a.reference-preview img[src*="bibimcha-profile"]{object-fit:contain;transform:none}
+a.reference-preview img[src*="bibimcha-profile"]{object-fit:contain;object-position:center;transform:none}
+a.reference-preview img[src*="soulju-profile"]{background:#006009}
+a.reference-preview img[src*="sushinova-profile"]{background:#302a96}
+a.reference-preview img[src*="bibimcha-profile"]{background:#00b930}
 /* The brochure photo occupies y=316..860 of the 1023px cover. */
 a.reference-preview img[src*="mobiltech-city"],
 a.reference-preview img[src*="mobiltech-light"]{position:absolute;left:0;top:50%;width:100%;height:auto;max-width:none;transform:translateY(-57.5%)}
 @media(max-width:600px){
- .logo-marquee img[src*="kakao.svg"]{height:43.2px}
+ .logo-marquee img[src*="kakao.svg"]{height:54px}
  .logo-marquee img[src*="meta.svg"]{height:23px}
  #operations .tools{gap:24px}
 }
+
+/* Keep the enlarged six-stage text readable at intermediate widths. */
+@media(min-width:901px) and (max-width:1400px){
+ #system .system-flow{grid-template-columns:repeat(3,minmax(0,1fr))}
+ #system .system-flow>div:nth-child(3n){border-right:1px solid var(--line)}
+}
+@media(max-width:900px){#operations .tools{left:50%}}
