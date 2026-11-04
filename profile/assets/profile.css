@@ -70,7 +70,7 @@ a.reference-preview:hover img{transform:scale(1.03)}
 #system .system-flow h3{font-size:22.68px}
 #system .system-flow p{font-size:22.32px}
 .logo-marquee img[src*="youtube.svg"]{filter:none}
-.logo-marquee img[src*="kakao.svg"]{height:clamp(57.375px,6.075vw,91.125px)}
+.logo-marquee img[src*="kakao.svg"]{height:clamp(71.71875px,7.59375vw,113.90625px)}
 .logo-marquee img[src*="meta.svg"]{height:clamp(23px,2.53vw,36.8px)}
 a.reference-preview:has(img[src*="soulju-profile"]),
 a.reference-preview:has(img[src*="sushinova-profile"]),
@@ -85,7 +85,7 @@ a.reference-preview img[src*="bibimcha-profile"]{background:#00b930}
 a.reference-preview img[src*="mobiltech-city"],
 a.reference-preview img[src*="mobiltech-light"]{position:absolute;left:0;top:50%;width:100%;height:auto;max-width:none;transform:translateY(-57.5%)}
 @media(max-width:600px){
- .logo-marquee img[src*="kakao.svg"]{height:54px}
+ .logo-marquee img[src*="kakao.svg"]{height:67.5px}
  .logo-marquee img[src*="meta.svg"]{height:23px}
  #operations .tools{gap:24px}
 }
