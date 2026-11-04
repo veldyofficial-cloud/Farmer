@@ -102,8 +102,8 @@
 
 
 /* ambient smoke / gradient light behind the subscription area */
-'#veldy-partners{position:relative;isolation:isolate;overflow-x:clip;order:-499}' +
-'.framer-8qUek .framer-122h8qz,body .framer-122h8qz{order:-500!important}' +
+'#veldy-partners{position:relative;isolation:isolate;overflow-x:clip;order:0}' +
+'.framer-8qUek .framer-122h8qz,body .framer-122h8qz{order:0!important}' +
 '#veldy-partners .vp-hero,#veldy-partners .vp-sub-layout{position:relative}' +
 '#veldy-partners .vp-hero:before,#veldy-partners .vp-sub-layout:before{content:"";position:absolute;z-index:-1;pointer-events:none;inset:-25% -15%;filter:blur(70px);opacity:.9;background:radial-gradient(38% 42% at 18% 30%,rgba(120,110,255,.34),transparent 70%),radial-gradient(34% 40% at 82% 38%,rgba(60,200,225,.22),transparent 70%),radial-gradient(40% 36% at 55% 85%,rgba(255,160,120,.14),transparent 70%);animation:vpSmoke 18s ease-in-out infinite alternate}' +
 '#veldy-partners .vp-sub-layout:before{inset:-10% -15%}' +

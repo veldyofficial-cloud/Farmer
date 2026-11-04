@@ -61,3 +61,26 @@ a.reference-preview:hover img{transform:scale(1.03)}
 .site-header .brand img{height:clamp(14px,1.5vw,20px);width:auto;display:block}
 .closing .footer-mark{font-size:0;line-height:0;margin:clamp(20px,3vw,40px) 0}
 .closing .footer-mark img{width:100%;height:auto;display:block}
+
+/* November review: align tools to the heading, preserve reference artwork. */
+#operations .tools{width:min(100%,760px);margin-left:0;margin-right:auto;gap:clamp(20px,4vw,66px)}
+#operations .tools img{height:38.4px;max-width:168px}
+#operations .tool-kakao{font-size:26.4px;gap:12px}
+#operations .tool-kakao img{height:36px}
+#system .system-flow h3{font-size:16.8px}
+#system .system-flow p{font-size:14.4px}
+.logo-marquee img[src*="youtube.svg"]{filter:none}
+.logo-marquee img[src*="kakao.svg"]{height:clamp(45.9px,4.86vw,72.9px)}
+.logo-marquee img[src*="meta.svg"]{height:clamp(23px,2.53vw,36.8px)}
+a.reference-preview:has(img[src*="sushinova-profile"]),
+a.reference-preview:has(img[src*="bibimcha-profile"]){aspect-ratio:16/9}
+a.reference-preview img[src*="sushinova-profile"],
+a.reference-preview img[src*="bibimcha-profile"]{object-fit:contain;transform:none}
+/* The brochure photo occupies y=316..860 of the 1023px cover. */
+a.reference-preview img[src*="mobiltech-city"],
+a.reference-preview img[src*="mobiltech-light"]{position:absolute;left:0;top:50%;width:100%;height:auto;max-width:none;transform:translateY(-57.5%)}
+@media(max-width:600px){
+ .logo-marquee img[src*="kakao.svg"]{height:43.2px}
+ .logo-marquee img[src*="meta.svg"]{height:23px}
+ #operations .tools{gap:24px}
+}

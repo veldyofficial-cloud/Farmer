@@ -85,7 +85,7 @@ caps+='</div></section>'
 # Process: the Precept orbit (approved replacement for the template's hover-only steps),
 # embedded as a sticky iframe whose scroll position follows this page.
 approach=(f'<section class="section approach-section" id="approach">{tag(4,"OUR APPROACH")}<div class="split"><h2 class="section-heading">From Insight<br>to Continuous<br><span class="muted">Improvement.</span></h2><p class="process-intro">{text(sections[4][-1])}</p></div></section>'
-    '<section class="orbit-host" id="process-orbit" aria-label="협업 과정"><iframe class="orbit-frame" src="precept.framer.website/orbit.html" title="Process steps" tabindex="-1"></iframe></section>')
+    '<section class="orbit-host" id="process-orbit" aria-label="협업 과정"><iframe class="orbit-frame" src="precept.framer.website/orbit.html?v=20261104" title="Process steps" tabindex="-1"></iframe></section>')
 
 services=''
 for n,id_,label in [(5,'brand','BRAND STRATEGY & IDENTITY'),(6,'experience','BRAND EXPERIENCE & DIGITAL'),(7,'content','CONTENT STRATEGY & PRODUCTION'),(8,'channels','CHANNEL CONTENT & ANALYTICS'),(9,'communications','PR & CORPORATE COMMUNICATIONS'),(10,'operations','BUSINESS OPERATIONS')]:
@@ -95,7 +95,7 @@ for n,id_,label in [(5,'brand','BRAND STRATEGY & IDENTITY'),(6,'experience','BRA
     if n==8:
         # Official marks (simple-icons, Wikimedia Commons, littly's own og image), shown in one white tone.
         channels=[('NAVER','naver.svg'),('NAVER TV','navertv.svg'),('Instagram','instagram.svg'),('TikTok','tiktok.svg'),('Threads','threads.svg'),('YouTube','youtube.svg'),('Facebook / Meta','meta.svg'),('Kakao Channel','kakao.svg'),('Littly','littly.png'),('Daum','daum.svg')]
-        track=''.join(f'<img src="assets/channels/{f}" alt="{c}" loading="lazy">' for c,f in channels)
+        track=''.join(f'<img src="assets/channels/{f}?v=20261104" alt="{c}" loading="lazy">' for c,f in channels)
         services+=f'<div class="marquee logo-marquee" aria-label="운영 채널: {", ".join(c for c,_ in channels)}"><div class="marquee-track"><div>{track}</div><div aria-hidden="true">{track}</div></div></div>'
     if n==10:
         services+='<div class="tools"><span><img src="../assets/img/tools/monday.png" alt="monday.com" loading="lazy"></span><span class="tool-kakao"><img src="assets/channels/kakaotalk.svg" alt="" loading="lazy">KakaoTalk</span><span><img src="../assets/img/tools/gdrive.png" alt="Google Drive" loading="lazy"></span></div>'
@@ -164,7 +164,7 @@ dialog='''<dialog id="reference-dialog" aria-labelledby="reference-title"><div c
 content=hero+about+caps+approach+services+system+solutions+work+reference_html+directory+engagement+why
 def page(body,title='VELDY | Company Profile',base='./'):
     return f'''<!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>{title}</title><meta name="description" content="브랜드 전략에서 실행과 운영까지. VELDY의 전문 영역과 프로젝트, 브랜드 레퍼런스를 소개합니다."><base href="{base}"><link rel="stylesheet" href="assets/profile.css?v=20261027k"></head><body id="top">{nav}<main id="main">{body}</main>{closing}<script id="reference-data" type="application/json">{json.dumps(refs,ensure_ascii=False)}</script><script src="../assets/js/veldy-inquiry.js?v=20261026"></script><script src="assets/profile.js?v=20261027h" defer></script></body></html>'''
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>{title}</title><meta name="description" content="브랜드 전략에서 실행과 운영까지. VELDY의 전문 영역과 프로젝트, 브랜드 레퍼런스를 소개합니다."><base href="{base}"><link rel="stylesheet" href="assets/profile.css?v=20261104"></head><body id="top">{nav}<main id="main">{body}</main>{closing}<script id="reference-data" type="application/json">{json.dumps(refs,ensure_ascii=False)}</script><script src="../assets/js/veldy-inquiry.js?v=20261026"></script><script src="assets/profile.js?v=20261027h" defer></script></body></html>'''
 
 (OUT/'index.html').write_text(page(content),encoding='utf-8')
 (OUT/'projects/index.html').write_text(page(f'<section class="section subpage" id="work">{tag(13,"SELECTED WORK")}<h1 class="section-heading">Selected<br><span class="muted">Projects.</span></h1><p class="section-summary">실제 프로젝트의 제작물과 업무 범위를 확인하세요.</p><div class="project-grid">{project_cards(projects)}</div><a class="pill" href="./#references">레퍼런스 자료 보기 ↗</a></section>', 'VELDY | Selected Projects', '../'),encoding='utf-8')
