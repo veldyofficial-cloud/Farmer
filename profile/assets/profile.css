@@ -63,7 +63,7 @@ a.reference-preview:hover img{transform:scale(1.03)}
 .closing .footer-mark img{width:100%;height:auto;display:block}
 
 /* November review: align tools to the heading, preserve reference artwork. */
-#operations .tools{position:relative;left:calc(42.5% + clamp(28.75px,4.6vw,86.25px));transform:translateX(-50%);width:min(100%,760px);margin-left:0;margin-right:0;justify-content:center;gap:clamp(20px,4vw,66px)}
+#operations .tools{position:relative;left:calc(42.5% + clamp(28.75px,4.6vw,86.25px));transform:translateX(calc(-50% - 15px));width:min(100%,760px);margin-left:0;margin-right:0;justify-content:center;gap:clamp(20px,4vw,66px)}
 #operations .tools img{height:38.4px;max-width:168px}
 #operations .tool-kakao{font-size:26.4px;gap:12px}
 #operations .tool-kakao img{height:36px}
