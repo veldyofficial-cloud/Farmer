@@ -1,10 +1,10 @@
 (function(){
   var PROJECTS=[
-    {slug:'davinci-code',title:'Davinci Code',count:'06',category:'Branding Design',href:'work/davinci-code.html',bg:'https://cdn.imweb.me/upload/S20200310d1b0c0f80c87d/6779242cd6cc1.png',center:'https://cdn.imweb.me/upload/S20200310d1b0c0f80c87d/7043c842a2b54.png'},
-    {slug:'patchking',title:'Patchking',count:'07',category:'Brand Identity',href:'work/patchking.html',bg:'https://cdn.imweb.me/upload/S20200310d1b0c0f80c87d/7b536b7ec8290.png',center:'https://cdn.imweb.me/upload/S20200310d1b0c0f80c87d/71fc83a8043be.png'},
-    {slug:'soulju',title:'Soulju',count:'08',category:'BI·CI & Profile',href:'work/soulju.html',bg:'https://cdn.imweb.me/upload/S20200310d1b0c0f80c87d/66d0b5485ebc9.png',center:'https://cdn.imweb.me/upload/S20200310d1b0c0f80c87d/5e1323c7de71e.png'},
-    {slug:'teoljabi',title:'Teoljabi',count:'09',category:'Web Site & Branding',href:'work/teoljabi.html',bg:'https://cdn.imweb.me/upload/S20200310d1b0c0f80c87d/91fee34ffc57c.jpg',center:'https://cdn.imweb.me/upload/S20200310d1b0c0f80c87d/8647f8504f55a.jpg'},
-    {slug:'bibimcha',title:'Bibimcha',count:'10',category:'Branding Design',href:'work/bibimcha.html',bg:'https://cdn.imweb.me/upload/S20200310d1b0c0f80c87d/af0ba9bf48dfc.png',center:'https://cdn.imweb.me/upload/S20200310d1b0c0f80c87d/0881de41247e0.png'}
+    {slug:'davinci-code',title:'Davinci Code',count:'06',category:'Branding Design',href:'work/davinci-code.html',bg:'assets/img/projects/home/davinci-code-bg.webp',center:'assets/img/projects/home/davinci-code-center.webp'},
+    {slug:'patchking',title:'Patchking',count:'07',category:'Brand Identity',href:'work/patchking.html',bg:'assets/img/projects/home/patchking-bg.webp',center:'assets/img/projects/home/patchking-center.webp'},
+    {slug:'soulju',title:'Soulju',count:'08',category:'BI·CI & Profile',href:'work/soulju.html',bg:'assets/img/projects/home/soulju-bg.webp',center:'assets/img/projects/home/soulju-center.webp'},
+    {slug:'teoljabi',title:'Teoljabi',count:'09',category:'Web Site & Branding',href:'work/teoljabi.html',bg:'assets/img/projects/home/teoljabi-bg.webp',center:'assets/img/projects/home/teoljabi-center.webp'},
+    {slug:'bibimcha',title:'Bibimcha',count:'10',category:'Branding Design',href:'work/bibimcha.html',bg:'assets/img/projects/home/bibimcha-bg.webp',center:'assets/img/projects/home/bibimcha-center.webp'}
   ];
 
   function ensureStyle(){
@@ -64,6 +64,7 @@
   function setImg(img,src,alt){
     if(!img)return;
     img.removeAttribute('srcset');img.removeAttribute('sizes');img.removeAttribute('width');img.removeAttribute('height');
+    img.setAttribute('loading','lazy');img.setAttribute('decoding','async');
     img.setAttribute('src',src);img.setAttribute('alt',alt||'');
   }
 

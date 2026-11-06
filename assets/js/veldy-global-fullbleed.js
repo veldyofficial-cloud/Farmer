@@ -9,7 +9,8 @@
 
   function style(){
     var s=document.getElementById(STYLE_ID);
-    if(!s){s=document.createElement('style');s.id=STYLE_ID;(document.head||document.documentElement).appendChild(s);}
+    if(s)return; // rewriting the style would re-trigger the MutationObserver below on every frame
+    s=document.createElement('style');s.id=STYLE_ID;(document.head||document.documentElement).appendChild(s);
     s.textContent=
       'html,body{overflow-x:clip!important}' +
       '.'+FULL+'{box-sizing:border-box!important;width:100vw!important;max-width:none!important;min-width:100vw!important;position:relative!important;left:50%!important;right:auto!important;margin-left:-50vw!important;margin-right:-50vw!important}' +
@@ -75,6 +76,7 @@
   function markTextStrips(){
     var vw=Math.max(document.documentElement.clientWidth||0,window.innerWidth||0);
     document.querySelectorAll('body *').forEach(function(el){
+      if(el.children.length<4)return; // cheap checks first: measuring every element forces layout
       if(el.closest('section[data-framer-name="Testimonial"],section[data-framer-name="Client"]'))return;
       if(el.closest('.veldy-strip-track'))return;
       var r=el.getBoundingClientRect();
@@ -151,13 +153,13 @@
   function markLogoTickers(){
     var vw=Math.max(document.documentElement.clientWidth||0,window.innerWidth||0);
     document.querySelectorAll('body *').forEach(function(el){
+      if(el.getElementsByTagName('img').length<5)return; // cheap check first: measuring every element forces layout
       if(el.closest('section[data-framer-name="Testimonial"],section[data-framer-name="Client"]'))return;
       if(el.classList.contains(TICKER))return;
       var r=el.getBoundingClientRect();
       if(!r.width||!r.height||r.height<45||r.height>190)return;
       if(r.width<Math.min(vw*.6,650))return;
       if(!rgbWhite(getComputedStyle(el).backgroundColor))return;
-      if(el.querySelectorAll('img').length<5)return;
       add(el);el.classList.add(TICKER);
     });
   }
@@ -190,7 +192,7 @@
   [60,220,600,1200,2500,5000].forEach(function(t){setTimeout(repair,t);});
   window.addEventListener('load',repair);
   window.addEventListener('resize',schedule);
-  try{new MutationObserver(schedule).observe(document.documentElement,{childList:true,subtree:true});}catch(e){}
+  try{new MutationObserver(function(rs){if(rs.some(function(r){return r.target.nodeName!=='STYLE';}))schedule();}).observe(document.documentElement,{childList:true,subtree:true});}catch(e){}
 })();
 
 /* KakaoTalk floating contact button: fixed across all VELDY pages (desktop + mobile). */

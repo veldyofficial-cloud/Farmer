@@ -3,11 +3,10 @@
 
   function ensureStyle(){
     var st=document.getElementById(STYLE_ID);
-    if(!st){
-      st=document.createElement('style');
-      st.id=STYLE_ID;
-      (document.head||document.documentElement).appendChild(st);
-    }
+    if(st)return; // rewriting the style would re-trigger the MutationObserver below on every frame
+    st=document.createElement('style');
+    st.id=STYLE_ID;
+    (document.head||document.documentElement).appendChild(st);
     st.textContent=
       'html,body{overflow-x:clip!important}' +
       'section[data-framer-name="Testimonial"],section[data-framer-name="Testimonial"] [data-framer-name="Container"]{overflow:visible!important}' +

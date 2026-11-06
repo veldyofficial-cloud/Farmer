@@ -323,7 +323,7 @@
     window.addEventListener('orientationchange', apply);
     window.addEventListener('load', apply);
     // Re-anchor whenever Framer re-renders the footer (cheap: only repositions).
-    try { new MutationObserver(apply).observe(document.documentElement, { childList: true, subtree: true }); } catch (e) {}
+    try { new MutationObserver(function (rs) { if (rs.some(function (r) { return r.target.nodeName !== 'STYLE'; })) apply(); }).observe(document.documentElement, { childList: true, subtree: true }); } catch (e) {}
     // Keep it aligned during layout shifts we don't get events for.
     if (window.ResizeObserver) { try { var ro = new ResizeObserver(apply); ro.observe(document.documentElement); } catch (e) {} }
   }
