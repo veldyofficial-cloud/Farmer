@@ -129,9 +129,9 @@
 /* scrolling ticker — white bg, full bleed */
 '#veldy-partners .vp-ticker-wrap{position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;width:100vw;background:#fff;margin-top:clamp(60px,8vw,120px)}' +
 '#veldy-partners .vp-ticker{overflow:hidden;white-space:nowrap;height:clamp(112px,12vw,176px);padding:0;display:flex;align-items:center}' +
-'#veldy-partners .vp-ticker-track{display:inline-flex;align-items:center;animation:vpScroll 40s linear infinite}' +
+'#veldy-partners .vp-ticker-track{display:inline-flex;align-items:center;animation:vpScroll 40s linear infinite;will-change:transform}' +
 '#veldy-partners .vp-ticker-item{flex:none;padding:0 clamp(16px,2vw,32px)}' +
-'#veldy-partners .vp-ticker-item img{height:clamp(100px,10vw,150px);max-height:calc(100% - 16px);width:auto;display:block}' +
+'#veldy-partners .vp-ticker-item img{height:clamp(100px,10vw,150px);max-height:calc(100% - 16px);width:auto;aspect-ratio:1/1;display:block}' +
 '@keyframes vpScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}' +
 /* WHY VELDY */
 '#veldy-partners .vp-wv{text-align:left;margin-top:clamp(80px,10vw,140px)}' +
@@ -199,7 +199,7 @@
     var logoItems = [];
     for (var li = 1; li <= LOGO_COUNT; li++) {
       var idx = (li < 10 ? '0' : '') + li;
-      logoItems.push('<span class="vp-ticker-item"><img src="assets/img/logos/logo-' + idx + '.png" alt="" loading="lazy"></span>');
+      logoItems.push('<span class="vp-ticker-item"><img src="assets/img/logos/sm/logo-' + idx + '.webp" alt="" width="320" height="320" decoding="async"></span>');
     }
     var tickerItems = logoItems.concat(logoItems).join('');
 
@@ -380,6 +380,8 @@
     var node = getNode();
     if (observer) observer.disconnect();
     faq.parentNode.insertBefore(node, faq.nextSibling);
+    var track = node.querySelector('.vp-ticker-track');
+    if (track) track.style.animationDelay = (-(Date.now() % 40000) / 1000) + 's';
     if (observer) observer.observe(document.documentElement, { childList: true, subtree: true });
   }
 
