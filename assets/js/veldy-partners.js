@@ -24,7 +24,7 @@
     { icon: 'video', title: '영상 편집', desc: '촬영 및 편집' }
   ];
 
-  var LOGO_COUNT = 37;
+  var LOGO_COUNT = 40;
 
   var TOOLS = [
     { id: 'monday', logo: 'assets/img/tools/monday.png', detail: 'assets/img/tools/monday-detail.png' },
