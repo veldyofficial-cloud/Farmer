@@ -5,17 +5,24 @@
 #__framer-badge-container{display:none!important}
 </style>
 <style id="veldy-orbit-clean-dial-align">
-/* Remove the radial hand, angle labels, and center marker on all devices. */
-.poRncmkqop > div > svg[aria-hidden="true"],
-.poRrcmkqop > div > svg[aria-hidden="true"]{display:none!important}
-.poRncmkqop > div > div[style*="border-radius"],
-.poRrcmkqop > div > div[style*="border-radius"]{display:none!important}
-/* Left-align the 1/5 counter with the title and description on PC and mobile. */
+/* Retain the dial/tick graphics. Hide only angle labels (25°, 50°, etc.)
+   and the protruding radial indicator line, on desktop and mobile. */
+.poRncmkqop > div > svg[aria-hidden="true"] > g > text,
+.poRrcmkqop > div > svg[aria-hidden="true"] > g > text,
+.poRncmkqop > div > svg[aria-hidden="true"] > path:last-of-type,
+.poRrcmkqop > div > svg[aria-hidden="true"] > path:last-of-type {
+  display:none!important;
+}
+/* Restore counter's original alignment: previously margin-left:-12px
+   offset the 3 / 5 number to the left of Build and its description. */
 .poRncmkqop span[style*="font-variant-numeric"],
-.poRrcmkqop span[style*="font-variant-numeric"]{
-padding-left:0!important;padding-right:0!important;margin-left:-12px!important}
+.poRrcmkqop span[style*="font-variant-numeric"] {
+  padding-left:0!important;
+  padding-right:12px!important;
+  margin-left:0!important;
+}
 .poRncmkqop .poRncmkqop-title,
-.poRrcmkqop .poRrcmkqop-title{text-align:left!important}
+.poRrcmkqop .poRrcmkqop-title {text-align:left!important}
 </style>
 <script id="orbit-bridge">(function(){
   var P=window.parent;
