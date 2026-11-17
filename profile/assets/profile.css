@@ -101,3 +101,32 @@ a.reference-preview img[src*="mobiltech-light"]{position:absolute;left:0;top:50%
 .logo-wall .brand-band img{--s:1;height:clamp(100px,10vw,150px);width:auto;aspect-ratio:1/1;max-width:none;object-fit:contain;margin:0 clamp(8px,1.2vw,20px)}
 .logo-wall .brand-band .marquee-track{animation-duration:150s}
 @media(max-width:600px){.logo-wall .brand-band img{height:96px;margin:0 6px}.logo-wall .brand-band .marquee-track{animation-duration:110s}}
+
+/* 2026-11-17: unified top-right MENU navigation on PC and mobile */
+.site-header{grid-template-columns:1fr auto 1fr}
+.site-header .menu-toggle{
+  display:inline-flex;grid-column:3;justify-self:end;align-items:center;
+  justify-content:center;padding:14px 0 14px 16px;margin:0;
+  color:var(--fg);background:transparent;border:0;
+  font:inherit;font-size:12px;font-weight:600;letter-spacing:.14em;
+  line-height:1.1;text-transform:uppercase;cursor:pointer
+}
+.site-header .menu-toggle:hover,.site-header .menu-toggle:focus-visible,
+.site-header .menu-toggle[aria-expanded="true"]{color:var(--accent)}
+.site-header nav{
+  display:none;position:absolute;top:100%;right:var(--pad);left:auto;
+  width:min(320px,calc(100vw - 40px));padding:12px 22px;
+  flex-direction:column;align-items:stretch;gap:0;
+  background:#080808;border:1px solid rgba(255,255,255,.22);
+  box-shadow:0 20px 40px rgba(0,0,0,.45);z-index:2;font-size:16px
+}
+.site-header nav.open{display:flex}
+.site-header nav a{display:block;padding:12px 0}
+.site-header nav a+a{border-top:1px solid rgba(255,255,255,.12)}
+@media(max-width:900px){
+  .site-header{grid-template-columns:auto 1fr auto}
+  .site-header .menu-toggle{grid-column:3}
+  .site-header nav{top:100%;right:var(--pad);left:auto;padding:12px 22px;
+    flex-direction:column;font-size:16px}
+  .site-header nav.open{display:flex}
+}
